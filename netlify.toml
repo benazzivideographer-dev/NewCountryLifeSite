@@ -1,0 +1,47 @@
+# ─── Configurazione deploy Netlify ─────────────────────────────────
+# Copiare questo file nella root del progetto. Netlify lo legge
+# automaticamente. Serve a due cose: far funzionare i link diretti
+# all'app (es. /app/) e NON far mettere in cache il service worker.
+
+[build]
+  publish = "."
+  command = ""
+
+# ─── Header HTTP ──────────────────────────────────────────────────
+
+# Il service worker non deve mai essere servito dalla cache del browser,
+# altrimenti gli utenti restano bloccati su una versione vecchia
+# dell'app anche dopo che hai pubblicato aggiornamenti.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Gli script e i CSS vanno ricalcolati a ogni deploy.
+# Senza questo, il browser continua a usare il vecchio main.js
+# e l'app sembra "non aggiornata" anche dopo il rilascio.
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/app/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Sicurezza di base. 'unsafe-inline' per gli stili e gli script
+# e' necessario perche il codice esistente inietta CSS e onclick.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(self), camera=(), microphone=()"

@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CountryLife – La casa europea della Line Dance</title>
+  <meta name="description" content="Trova eventi, scuole e professionisti della Line Dance in Italia e in tutta Europa. Community, corsi, marketplace e viaggi." />
+
+  <!-- PWA: rende il sito installabile su home screen (Android, iOS, desktop) -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1B1B1B" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CountryLife" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" />
+  <link rel="icon" href="/icons/icon-192.png" sizes="192x192" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+
+      <!-- Logo -->
+      <a href="#hero" class="navbar__logo">
+        <span class="logo-line">Country</span><span class="logo-life">Life</span>
+        <span class="logo-dot">●</span>
+      </a>
+
+      <!-- Nav links -->
+      <nav class="navbar__nav" id="navMenu">
+        <a href="eventi.html">Eventi</a>
+        <a href="#travel">Travel</a>
+        <a href="#schools">Scuole</a>
+        <a href="#academy">Academy</a>
+        <a href="#marketplace">Marketplace</a>
+        <a href="#recruiting">Recruiting</a>
+        <a href="#premium" class="nav-premium">Premium</a>
+      </nav>
+
+      <!-- Lang + CTA -->
+      <div class="navbar__actions">
+        <button class="btn-lang" id="langToggle" title="Switch language">
+          <i class="fa-solid fa-earth-europe"></i>
+          <span id="langLabel">IT</span>
+        </button>
+        <a href="#community" class="btn btn-outline btn-sm">Accedi</a>
+        <a href="#community" class="btn btn-primary btn-sm">Registrati</a>
+      </div>
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg-pattern"></div>
+    <div class="container hero__content">
+      <p class="hero__eyebrow" data-it="La community europea della Line Dance" data-en="Europe's Line Dance Community">La community europea della Line Dance</p>
+      <h1 class="hero__title">
+        <span class="logo-line">Country</span><span class="logo-life">Life</span>
+      </h1>
+      <p class="hero__subtitle" data-it="Trova eventi, connettiti con ballerini e appassionati, scopri scuole e vivi la Line Dance in Italia ed in tutta Europa." data-en="Find events, connect with dancers and enthusiasts, discover schools and live Line Dance in Italy and across Europe.">
+        Trova eventi, connettiti con ballerini e appassionati, scopri scuole e vivi la Line Dance in Italia ed in tutta Europa.
+      </p>
+      <div class="hero__cta">
+        <a href="#events" class="btn btn-primary btn-lg">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span data-it="Trova Eventi" data-en="Find Events">Trova Eventi</span>
+        </a>
+        <a href="#community" class="btn btn-secondary btn-lg">
+          <i class="fa-solid fa-users"></i>
+          <span data-it="Unisciti alla Community" data-en="Join the Community">Unisciti alla Community</span>
+        </a>
+        <a href="#schools" class="btn btn-outline-dark btn-lg">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span data-it="Cerca una Scuola" data-en="Find a School">Cerca una Scuola</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero__scroll-hint">
+      <span></span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       STATISTICHE COMMUNITY
+  ═══════════════════════════════════════════ -->
+  <section class="stats" id="stats">
+    <div class="container stats__grid" id="statsGrid">
+      <!-- Popolato via JS -->
+      <div class="stats__loading">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       EVENTI IN EVIDENZA
+  ═══════════════════════════════════════════ -->
+  <section class="section section--light" id="events">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-it="Calendario Europeo" data-en="European Calendar">Calendario Europeo</span>
+        <h2 class="section__title" data-it="Prossimi Eventi" data-en="Upcoming Events">Prossimi Eventi</h2>
+        <p class="section__desc" data-it="Festival, competizioni, workshop e raduni in Italia ed in tutta Europa." data-en="Festivals, competitions, workshops and gatherings in Italy and across Europe.">
+          Festival, competizioni, workshop e raduni in Italia ed in tutta Europa.
+        </p>
+      </div>
+
+      <!-- Filtri -->
+      <div class="filters" id="eventFilters">
+        <button class="filter-btn active" data-filter="all" data-it="Tutti" data-en="All">Tutti</button>
+        <button class="filter-btn" data-filter="festival" data-it="Festival" data-en="Festival">Festival</button>
+        <button class="filter-btn" data-filter="competizione" data-it="Competizioni" data-en="Competitions">Competizioni</button>
+        <button class="filter-btn" data-filter="workshop" data-it="Workshop" data-en="Workshop">Workshop</button>
+        <button class="filter-btn" data-filter="raduno" data-it="Raduni" data-en="Gatherings">Raduni</button>
+      </div>
+
+      <!-- Cards -->
+      <div class="cards-grid" id="eventsGrid">
+
+        <!-- ★ EVENTO REALE ★ -->
+        <article class="card card--event card--featured-event" data-type="festival">
+          <div class="card__badge card__badge--festival">Festival</div>
+          <div class="card__badge card__badge--imminent">🔥 Imminente</div>
+          <div class="card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/L2TWBfO6"
+                 alt="2ª Edizione Festa Country – Motta Visconti"
+                 class="card__real-img" />
+            <div class="card__img-overlay">
+              <span class="card__date-pill">
+                <i class="fa-solid fa-calendar-days"></i> 20 Giugno 2026 · ore 17:00
+              </span>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__meta">
+              <i class="fa-solid fa-location-dot"></i> Motta Visconti, Italia
+              &nbsp;·&nbsp;
+              <i class="fa-solid fa-calendar"></i> 20 Giu 2026
+            </p>
+            <h3 class="card__title">2ª Edizione Festa Country</h3>
+            <p class="card__text">
+              Musica &amp; balli con DJ, barbeque americano e giochi a tema per adulti e bambini.
+              Organizzato da Pro Loco &amp; Azienda Agricola Accadì.
+            </p>
+            <div class="card__event-details">
+              <span class="card__detail"><i class="fa-solid fa-music"></i> Musica &amp; Balli con DJ</span>
+              <span class="card__detail"><i class="fa-solid fa-fire-burner"></i> Barbeque Americano</span>
+              <span class="card__detail"><i class="fa-solid fa-gamepad"></i> Giochi a tema</span>
+            </div>
+            <div class="card__footer">
+              <span class="card__level card__level--all">Tutti i livelli</span>
+              <a href="#" class="btn btn-primary btn-sm" data-it="Scopri" data-en="Discover">Scopri</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO REALE 2 ★ -->
+        <article class="card card--event card--featured-event" data-type="festival">
+          <div class="card__badge card__badge--festival">Festival</div>
+          <div class="card__badge card__badge--imminent">🌊 Salento</div>
+          <div class="card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/6hTghy3Q"
+                 alt="Blue Salento Country Fest 2026"
+                 class="card__real-img" />
+            <div class="card__img-overlay">
+              <span class="card__date-pill">
+                <i class="fa-solid fa-calendar-days"></i> 5 Settembre 2026
+              </span>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__meta">
+              <i class="fa-solid fa-location-dot"></i> Melendugno, Salento (LE)
+              &nbsp;·&nbsp;
+              <i class="fa-solid fa-calendar"></i> 5 Set 2026
+            </p>
+            <h3 class="card__title">Blue Salento Country Fest</h3>
+            <p class="card__text">
+              Festival country sul mare del Salento. Organizzato da Associazione Quinta Musa APS,
+              con il patrocinio del Comune di Melendugno.
+            </p>
+            <div class="card__event-details">
+              <span class="card__detail"><i class="fa-solid fa-hat-cowboy"></i> Country Music</span>
+              <span class="card__detail"><i class="fa-solid fa-person-walking"></i> Line Dance</span>
+              <span class="card__detail"><i class="fa-solid fa-phone"></i> 328 4666339</span>
+            </div>
+            <div class="card__footer">
+              <span class="card__level card__level--all">Tutti i livelli</span>
+              <a href="#" class="btn btn-primary btn-sm" data-it="Scopri" data-en="Discover">Scopri</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO REALE 3 ★ -->
+        <article class="card card--event card--featured-event" data-type="festival">
+          <div class="card__badge card__badge--festival">Festival</div>
+          <div class="card__badge card__badge--imminent">⭐ Round-Up</div>
+          <div class="card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/ConRVcSW"
+                 alt="Round-Up Country Festival – Cremona Fiere 2026"
+                 class="card__real-img card__real-img--dark" />
+            <div class="card__img-overlay">
+              <span class="card__date-pill">
+                <i class="fa-solid fa-calendar-days"></i> 13–15 Novembre 2026
+              </span>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__meta">
+              <i class="fa-solid fa-location-dot"></i> Cremona Fiere, Cremona (CR)
+              &nbsp;·&nbsp;
+              <i class="fa-solid fa-calendar"></i> 13–15 Nov 2026
+            </p>
+            <h3 class="card__title">Round-Up Country Festival</h3>
+            <p class="card__text">
+              Il festival italiano della Country Line Dance. Tre giorni di musica, balli e spettacoli
+              nella storica location di Cremona Fiere.
+            </p>
+            <div class="card__event-details">
+              <span class="card__detail"><i class="fa-solid fa-guitar"></i> Country Music</span>
+              <span class="card__detail"><i class="fa-solid fa-people-line"></i> Line Dance</span>
+              <span class="card__detail"><i class="fa-solid fa-calendar-week"></i> 3 giorni</span>
+            </div>
+            <div class="card__footer">
+              <span class="card__level card__level--all">Tutti i livelli</span>
+              <a href="#" class="btn btn-primary btn-sm" data-it="Scopri" data-en="Discover">Scopri</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO REALE 4 ★ -->
+        <article class="card card--event card--featured-event" data-type="festival">
+          <div class="card__badge card__badge--festival">Festival</div>
+          <div class="card__badge card__badge--imminent">⛰️ 11ª Ed.</div>
+          <div class="card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/Kqbbpax9"
+                 alt="11ª Valsassina Country Festival 2026"
+                 class="card__real-img" />
+            <div class="card__img-overlay">
+              <span class="card__date-pill">
+                <i class="fa-solid fa-calendar-days"></i> 10–12 Luglio 2026
+              </span>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__meta">
+              <i class="fa-solid fa-location-dot"></i> Valsassina, LC
+              &nbsp;·&nbsp;
+              <i class="fa-solid fa-calendar"></i> 10–12 Lug 2026
+            </p>
+            <h3 class="card__title">Valsassina Country Festival</h3>
+            <p class="card__text">
+              11ª edizione del festival country tra le Alpi lombarde. Tre giorni di musica, balli e cultura western. Ticket: info sul sito.
+            </p>
+            <div class="card__event-details">
+              <span class="card__detail"><i class="fa-solid fa-mountain"></i> Montagna</span>
+              <span class="card__detail"><i class="fa-solid fa-person-walking"></i> Line Dance</span>
+              <span class="card__detail"><i class="fa-solid fa-ticket"></i> Sul sito</span>
+            </div>
+            <div class="card__footer">
+              <span class="card__level card__level--all">Tutti i livelli</span>
+              <a href="#" class="btn btn-primary btn-sm" data-it="Scopri" data-en="Discover">Scopri</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section__cta">
+        <a href="eventi.html" class="btn btn-outline-brown" data-it="Vedi tutto il calendario →" data-en="View full calendar →">Vedi tutto il calendario →</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PARTNER TRAVEL
+  ═══════════════════════════════════════════ -->
+  <section class="section section--dark" id="travel">
+    <div class="container">
+      <div class="section__header section__header--light">
+        <span class="section__tag section__tag--light" data-it="Travel & Ospitalità" data-en="Travel & Hospitality">Travel & Ospitalità</span>
+        <h2 class="section__title section__title--light" data-it="Viaggia con CountryLife" data-en="Travel with CountryLife">Viaggia con CountryLife</h2>
+        <p class="section__desc section__desc--light" data-it="Hotel convenzionati, camping e aree camper selezionati vicino ai tuoi eventi preferiti." data-en="Partner hotels, camping and campervan areas selected near your favourite events.">
+          Hotel convenzionati, camping e aree camper selezionati vicino ai tuoi eventi preferiti.
+        </p>
+      </div>
+
+      <div class="travel-grid">
+        <div class="travel-card">
+          <div class="travel-card__icon"><i class="fa-solid fa-hotel"></i></div>
+          <h3 data-it="Hotel Partner" data-en="Partner Hotels">Hotel Partner</h3>
+          <p data-it="Tariffe riservate ai membri CountryLife nelle strutture più vicine agli eventi." data-en="Exclusive rates for CountryLife members at hotels close to events.">Tariffe riservate ai membri CountryLife nelle strutture più vicine agli eventi.</p>
+          <a href="#" class="btn btn-outline-light btn-sm" data-it="Esplora Hotel" data-en="Explore Hotels">Esplora Hotel</a>
+        </div>
+        <div class="travel-card">
+          <div class="travel-card__icon"><i class="fa-solid fa-tent"></i></div>
+          <h3 data-it="Camping" data-en="Camping">Camping</h3>
+          <p data-it="Campeggi e piazzole roulotte selezionati per i grandi eventi all'aperto." data-en="Campsites and caravan pitches selected for major outdoor events.">Campeggi e piazzole roulotte selezionati per i grandi eventi all'aperto.</p>
+          <a href="#" class="btn btn-outline-light btn-sm" data-it="Esplora Camping" data-en="Explore Camping">Esplora Camping</a>
+        </div>
+        <div class="travel-card">
+          <div class="travel-card__icon"><i class="fa-solid fa-caravan"></i></div>
+          <h3 data-it="Aree Camper" data-en="Campervan Areas">Aree Camper</h3>
+          <p data-it="Camper service e piazzole attrezzate per chi viaggia in libertà." data-en="Campervan service points for those who travel freely.">Camper service e piazzole attrezzate per chi viaggia in libertà.</p>
+          <a href="#" class="btn btn-outline-light btn-sm" data-it="Esplora Aree" data-en="Explore Areas">Esplora Aree</a>
+        </div>
+        <div class="travel-card travel-card--featured">
+          <div class="travel-card__icon"><i class="fa-solid fa-star"></i></div>
+          <h3 data-it="Pacchetti Weekend" data-en="Weekend Packages">Pacchetti Weekend</h3>
+          <p data-it="Festival + Hotel + Cena + Workshop. Tutto incluso, zero pensieri." data-en="Festival + Hotel + Dinner + Workshop. All-inclusive, zero hassle.">Festival + Hotel + Cena + Workshop. Tutto incluso, zero pensieri.</p>
+          <a href="#" class="btn btn-primary btn-sm" data-it="Scopri i Pacchetti" data-en="Discover Packages">Scopri i Pacchetti</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SCUOLE
+  ═══════════════════════════════════════════ -->
+  <section class="section section--beige" id="schools">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-it="Directory Europea" data-en="European Directory">Directory Europea</span>
+        <h2 class="section__title" data-it="Trova la tua Scuola" data-en="Find your School">Trova la tua Scuola</h2>
+        <p class="section__desc" data-it="Oltre 120 scuole di Line Dance in tutta Europa. Cerca per città, paese o livello." data-en="Over 120 Line Dance schools across Europe. Search by city, country or level.">
+          Scuole di Line Dance in tutta Europa. Cerca per città, paese o livello.
+        </p>
+      </div>
+
+      <!-- Barra di ricerca scuole -->
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Cerca per città o paese…" id="schoolSearch" />
+        <button class="btn btn-primary" data-it="Cerca" data-en="Search">Cerca</button>
+      </div>
+
+      <div class="schools-grid">
+        <article class="school-card">
+          <div class="school-card__avatar"><i class="fa-solid fa-hat-cowboy"></i></div>
+          <div class="school-card__body">
+            <h3>Country Steps Milano</h3>
+            <p class="school-card__meta"><i class="fa-solid fa-location-dot"></i> Milano, Italia</p>
+            <div class="school-card__stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+              <span>4.0</span>
+            </div>
+            <p class="school-card__tags">
+              <span class="tag">Beginner</span><span class="tag">Intermediate</span>
+            </p>
+          </div>
+          <a href="#" class="btn btn-outline-brown btn-sm">Profilo</a>
+        </article>
+
+        <article class="school-card">
+          <div class="school-card__avatar"><i class="fa-solid fa-hat-cowboy"></i></div>
+          <div class="school-card__body">
+            <h3>Paris Boot Scootin'</h3>
+            <p class="school-card__meta"><i class="fa-solid fa-location-dot"></i> Parigi, Francia</p>
+            <div class="school-card__stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <span>5.0</span>
+            </div>
+            <p class="school-card__tags">
+              <span class="tag">Tutti i livelli</span><span class="tag">Competizione</span>
+            </p>
+          </div>
+          <a href="#" class="btn btn-outline-brown btn-sm">Profilo</a>
+        </article>
+
+        <article class="school-card">
+          <div class="school-card__avatar"><i class="fa-solid fa-hat-cowboy"></i></div>
+          <div class="school-card__body">
+            <h3>Bavarian Line Dancers</h3>
+            <p class="school-card__meta"><i class="fa-solid fa-location-dot"></i> Monaco, Germania</p>
+            <div class="school-card__stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+              <span>4.2</span>
+            </div>
+            <p class="school-card__tags">
+              <span class="tag">Advanced</span><span class="tag">Instructor</span>
+            </p>
+          </div>
+          <a href="#" class="btn btn-outline-brown btn-sm">Profilo</a>
+        </article>
+
+        <article class="school-card">
+          <div class="school-card__avatar"><i class="fa-solid fa-hat-cowboy"></i></div>
+          <div class="school-card__body">
+            <h3>Madrid Boots & Spurs</h3>
+            <p class="school-card__meta"><i class="fa-solid fa-location-dot"></i> Madrid, Spagna</p>
+            <div class="school-card__stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+              <span>4.5</span>
+            </div>
+            <p class="school-card__tags">
+              <span class="tag">Beginner</span><span class="tag">Workshop</span>
+            </p>
+          </div>
+          <a href="#" class="btn btn-outline-brown btn-sm">Profilo</a>
+        </article>
+      </div>
+
+      <div class="section__cta">
+        <a href="#" class="btn btn-outline-brown" data-it="Esplora tutte le scuole →" data-en="Explore all schools →">Esplora tutte le scuole →</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ACADEMY
+  ═══════════════════════════════════════════ -->
+  <section class="section section--light" id="academy">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-it="Formazione Online" data-en="Online Training">Formazione Online</span>
+        <h2 class="section__title" data-it="CountryLife Academy" data-en="CountryLife Academy">CountryLife Academy</h2>
+        <p class="section__desc" data-it="Impara, migliora e ottieni certificazioni riconosciute in Italia ed in tutta Europa." data-en="Learn, improve and earn certifications recognised in Italy and across Europe.">
+          Impara, migliora e ottieni certificazioni riconosciute in Italia ed in tutta Europa.
+        </p>
+      </div>
+
+      <div class="academy-grid">
+        <div class="academy-card academy-card--beginner">
+          <div class="academy-card__icon"><i class="fa-solid fa-seedling"></i></div>
+          <h3 data-it="Principianti" data-en="Beginners">Principianti</h3>
+          <p data-it="Parti da zero con le basi della Line Dance. Ritmo, postura, passi fondamentali." data-en="Start from scratch with Line Dance fundamentals. Rhythm, posture, basic steps.">Parti da zero con le basi della Line Dance. Ritmo, postura, passi fondamentali.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Video tutorial HD" data-en="HD video tutorials">Video tutorial HD</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Esercizi guidati" data-en="Guided exercises">Esercizi guidati</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Certificato di completamento" data-en="Completion certificate">Certificato di completamento</span></li>
+          </ul>
+          <a href="#premium" class="btn btn-primary btn-sm" data-it="Accedi con Premium" data-en="Access with Premium">Accedi con Premium</a>
+        </div>
+
+        <div class="academy-card academy-card--intermediate">
+          <div class="academy-card__icon"><i class="fa-solid fa-fire"></i></div>
+          <h3 data-it="Intermedio" data-en="Intermediate">Intermedio</h3>
+          <p data-it="Approfondisci tecnica e stile. Coreografie complete, dinamiche avanzate." data-en="Deepen technique and style. Complete choreographies and advanced dynamics.">Approfondisci tecnica e stile. Coreografie complete, dinamiche avanzate.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Libreria coreografie" data-en="Choreography library">Libreria coreografie</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Sessioni live" data-en="Live sessions">Sessioni live</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Feedback istruttori" data-en="Instructor feedback">Feedback istruttori</span></li>
+          </ul>
+          <a href="#premium" class="btn btn-primary btn-sm" data-it="Accedi con Premium" data-en="Access with Premium">Accedi con Premium</a>
+        </div>
+
+        <div class="academy-card academy-card--advanced">
+          <div class="academy-card__icon"><i class="fa-solid fa-crown"></i></div>
+          <h3 data-it="Avanzato & Certificazioni" data-en="Advanced & Certifications">Avanzato & Certificazioni</h3>
+          <p data-it="Percorsi per istruttori e giudici. Certificazioni riconosciute a livello europeo." data-en="Paths for instructors and judges. European-level recognised certifications.">Percorsi per istruttori e giudici. Certificazioni riconosciute a livello europeo.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Certificazione Istruttore" data-en="Instructor Certification">Certificazione Istruttore</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Certificazione Giudice" data-en="Judge Certification">Certificazione Giudice</span></li>
+            <li><i class="fa-solid fa-check"></i> <span data-it="Badge verificati" data-en="Verified badges">Badge verificati</span></li>
+          </ul>
+          <a href="#premium" class="btn btn-primary btn-sm" data-it="Accedi con Premium" data-en="Access with Premium">Accedi con Premium</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       MARKETPLACE
+  ═══════════════════════════════════════════ -->
+  <section class="section section--beige" id="marketplace">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-it="Shop Ufficiale" data-en="Official Shop">Shop Ufficiale</span>
+        <h2 class="section__title" data-it="Marketplace" data-en="Marketplace">Marketplace</h2>
+        <p class="section__desc" data-it="Abbigliamento, accessori e merchandising selezionati per ballerini e appassionati in Italia ed in tutta Europa." data-en="Clothing, accessories and merchandise selected for dancers and enthusiasts in Italy and across Europe.">
+          Abbigliamento, accessori e merchandising selezionati per ballerini e appassionati in Italia ed in tutta Europa.
+        </p>
+      </div>
+
+      <div class="market-categories">
+        <div class="market-cat">
+          <div class="market-cat__icon"><i class="fa-solid fa-shoe-prints"></i></div>
+          <h4 data-it="Stivali" data-en="Boots">Stivali</h4>
+        </div>
+        <div class="market-cat">
+          <div class="market-cat__icon"><i class="fa-solid fa-hat-cowboy"></i></div>
+          <h4 data-it="Cappelli" data-en="Hats">Cappelli</h4>
+        </div>
+        <div class="market-cat">
+          <div class="market-cat__icon"><i class="fa-solid fa-shirt"></i></div>
+          <h4 data-it="Abbigliamento" data-en="Clothing">Abbigliamento</h4>
+        </div>
+        <div class="market-cat">
+          <div class="market-cat__icon"><i class="fa-solid fa-bag-shopping"></i></div>
+          <h4 data-it="Accessori" data-en="Accessories">Accessori</h4>
+        </div>
+        <div class="market-cat">
+          <div class="market-cat__icon"><i class="fa-solid fa-gift"></i></div>
+          <h4 data-it="Merchandising" data-en="Merchandise">Merchandising</h4>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <article class="card card--product">
+          <div class="card__img-wrap">
+            <div class="card__img-placeholder card__img-placeholder--product"><i class="fa-solid fa-shoe-prints"></i></div>
+            <span class="card__badge card__badge--new">Nuovo</span>
+          </div>
+          <div class="card__body">
+            <p class="card__brand">Ariat Europe</p>
+            <h3 class="card__title">Stivale Western Pro</h3>
+            <div class="card__price-row">
+              <span class="card__price">€189,00</span>
+              <button class="btn btn-primary btn-sm" data-it="Aggiungi" data-en="Add">Aggiungi</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card--product">
+          <div class="card__img-wrap">
+            <div class="card__img-placeholder card__img-placeholder--product"><i class="fa-solid fa-hat-cowboy"></i></div>
+          </div>
+          <div class="card__body">
+            <p class="card__brand">CountryLife Collection</p>
+            <h3 class="card__title">Cappello Country Classic</h3>
+            <div class="card__price-row">
+              <span class="card__price">€64,00</span>
+              <button class="btn btn-primary btn-sm" data-it="Aggiungi" data-en="Add">Aggiungi</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card--product">
+          <div class="card__img-wrap">
+            <div class="card__img-placeholder card__img-placeholder--product"><i class="fa-solid fa-shirt"></i></div>
+            <span class="card__badge card__badge--sale">−20%</span>
+          </div>
+          <div class="card__body">
+            <p class="card__brand">DanceWear EU</p>
+            <h3 class="card__title">Camicia da Competizione</h3>
+            <div class="card__price-row">
+              <span class="card__price">€79,00</span>
+              <span class="card__price-old">€98,00</span>
+              <button class="btn btn-primary btn-sm" data-it="Aggiungi" data-en="Add">Aggiungi</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card--product">
+          <div class="card__img-wrap">
+            <div class="card__img-placeholder card__img-placeholder--product"><i class="fa-solid fa-gift"></i></div>
+          </div>
+          <div class="card__body">
+            <p class="card__brand">CountryLife Merch</p>
+            <h3 class="card__title">Kit Fan Ufficiale</h3>
+            <div class="card__price-row">
+              <span class="card__price">€35,00</span>
+              <button class="btn btn-primary btn-sm" data-it="Aggiungi" data-en="Add">Aggiungi</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section__cta">
+        <a href="#" class="btn btn-outline-brown" data-it="Vai al Marketplace →" data-en="Go to Marketplace →">Vai al Marketplace →</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       RECRUITING
+  ═══════════════════════════════════════════ -->
+  <section class="section section--light" id="recruiting">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-it="Opportunità" data-en="Opportunities">Opportunità</span>
+        <h2 class="section__title" data-it="Recruiting & Opportunità" data-en="Recruiting & Opportunities">Recruiting & Opportunità</h2>
+        <p class="section__desc" data-it="Sei un istruttore, coreografo o performer? Trova la tua prossima collaborazione." data-en="Are you an instructor, choreographer or performer? Find your next collaboration.">
+          Sei un istruttore, coreografo o performer? Trova la tua prossima collaborazione.
+        </p>
+      </div>
+
+      <div class="recruiting-grid">
+        <div class="recruiting-panel">
+          <div class="recruiting-panel__icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <h3 data-it="Trova Insegnante" data-en="Find an Instructor">Trova Insegnante</h3>
+          <p data-it="Le scuole possono cercare istruttori, coreografi e performer disponibili in tutta Europa." data-en="Schools can find available instructors, choreographers and performers across Europe.">Le scuole possono cercare istruttori, coreografi e performer disponibili in tutta Europa.</p>
+          <a href="#" class="btn btn-primary" data-it="Cerca Professionisti" data-en="Find Professionals">Cerca Professionisti</a>
+        </div>
+        <div class="recruiting-panel">
+          <div class="recruiting-panel__icon"><i class="fa-solid fa-bullhorn"></i></div>
+          <h3 data-it="Bacheca Opportunità" data-en="Opportunities Board">Bacheca Opportunità</h3>
+          <p data-it="Workshop, eventi, collaborazioni. Pubblica o rispondi alle offerte disponibili." data-en="Workshops, events, collaborations. Post or respond to available offers.">Workshop, eventi, collaborazioni. Pubblica o rispondi alle offerte disponibili.</p>
+          <a href="#" class="btn btn-primary" data-it="Vedi Offerte" data-en="View Offers">Vedi Offerte</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PREMIUM
+  ═══════════════════════════════════════════ -->
+  <section class="section section--premium" id="premium">
+    <div class="container">
+      <div class="section__header section__header--light">
+        <span class="section__tag section__tag--gold" data-it="Abbonamento" data-en="Subscription">Abbonamento</span>
+        <h2 class="section__title section__title--light" data-it="CountryLife Premium" data-en="CountryLife Premium">CountryLife Premium</h2>
+        <p class="section__desc section__desc--light" data-it="Il massimo dalla community europea della Line Dance." data-en="Get the most from Europe's Line Dance community.">
+          Il massimo dalla community europea della Line Dance.
+        </p>
+      </div>
+
+      <div class="premium-card">
+        <div class="premium-card__price">
+          <span class="premium-card__currency">€</span>
+          <span class="premium-card__amount">9</span>
+          <span class="premium-card__cents">,90</span>
+          <span class="premium-card__period" data-it="/mese" data-en="/month">/mese</span>
+        </div>
+
+        <div class="premium-card__features">
+          <div class="premium-feature"><i class="fa-solid fa-circle-check"></i> <span data-it="Accesso completo all'Academy" data-en="Full Academy access">Accesso completo all'Academy</span></div>
+          <div class="premium-feature"><i class="fa-solid fa-circle-check"></i> <span data-it="Sconti esclusivi sugli eventi" data-en="Exclusive event discounts">Sconti esclusivi sugli eventi</span></div>
+          <div class="premium-feature"><i class="fa-solid fa-circle-check"></i> <span data-it="Convenzioni hotel e camping" data-en="Hotel & camping deals">Convenzioni hotel e camping</span></div>
+          <div class="premium-feature"><i class="fa-solid fa-circle-check"></i> <span data-it="Gruppi e contenuti esclusivi" data-en="Exclusive groups & content">Gruppi e contenuti esclusivi</span></div>
+          <div class="premium-feature"><i class="fa-solid fa-circle-check"></i> <span data-it="Badge Premium verificato" data-en="Verified Premium badge">Badge Premium verificato</span></div>
+          <div class="premium-feature"><i class="fa-solid fa-circle-check"></i> <span data-it="Marketplace agevolato" data-en="Marketplace discounts">Marketplace agevolato</span></div>
+        </div>
+
+        <a href="#" class="btn btn-primary btn-xl" data-it="Attiva Premium ora" data-en="Activate Premium now">Attiva Premium ora</a>
+        <p class="premium-card__note" data-it="Annulla in qualsiasi momento. Nessun costo nascosto." data-en="Cancel anytime. No hidden fees.">Annulla in qualsiasi momento. Nessun costo nascosto.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       AREA ORGANIZZATORE
+  ═══════════════════════════════════════════ -->
+  <section class="section section--beige" id="organizer">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-it="Per gli Organizzatori" data-en="For Organizers">Per gli Organizzatori</span>
+        <h2 class="section__title" data-it="Area Organizzatore" data-en="Organizer Area">Area Organizzatore</h2>
+        <p class="section__desc" data-it="Tutti gli strumenti per gestire i tuoi eventi in modo professionale." data-en="All the tools to manage your events professionally.">
+          Tutti gli strumenti per gestire i tuoi eventi in modo professionale.
+        </p>
+      </div>
+
+      <div class="organizer-grid">
+        <div class="org-feature">
+          <i class="fa-solid fa-calendar-plus"></i>
+          <h4 data-it="Pubblica eventi" data-en="Publish events">Pubblica eventi</h4>
+          <p data-it="Crea e gestisci la scheda del tuo evento con programma, location e info." data-en="Create and manage your event card with schedule, location and info.">Crea e gestisci la scheda del tuo evento con programma, location e info.</p>
+        </div>
+        <div class="org-feature">
+          <i class="fa-solid fa-ticket"></i>
+          <h4 data-it="Ticketing integrato" data-en="Integrated ticketing">Ticketing integrato</h4>
+          <p data-it="Vendita biglietti diretta con commissione CountryLife. Pagamenti sicuri." data-en="Direct ticket sales with CountryLife commission. Secure payments.">Vendita biglietti diretta con commissione CountryLife. Pagamenti sicuri.</p>
+        </div>
+        <div class="org-feature">
+          <i class="fa-solid fa-users-gear"></i>
+          <h4 data-it="Gestione iscritti" data-en="Manage attendees">Gestione iscritti</h4>
+          <p data-it="Lista iscritti, check-in digitale e comunicazioni dirette ai partecipanti." data-en="Attendee list, digital check-in and direct participant communications.">Lista iscritti, check-in digitale e comunicazioni dirette ai partecipanti.</p>
+        </div>
+        <div class="org-feature">
+          <i class="fa-solid fa-handshake"></i>
+          <h4 data-it="Convenzioni Travel" data-en="Travel partnerships">Convenzioni Travel</h4>
+          <p data-it="Collega il tuo evento agli hotel e camping partner per i tuoi partecipanti." data-en="Link your event to partner hotels and campsites for your attendees.">Collega il tuo evento agli hotel e camping partner per i tuoi partecipanti.</p>
+        </div>
+        <div class="org-feature">
+          <i class="fa-solid fa-chart-line"></i>
+          <h4 data-it="Analytics" data-en="Analytics">Analytics</h4>
+          <p data-it="Statistiche in tempo reale: vendite, visualizzazioni, provenienza del pubblico." data-en="Real-time stats: sales, views, audience origin.">Statistiche in tempo reale: vendite, visualizzazioni, provenienza del pubblico.</p>
+        </div>
+        <div class="org-feature org-feature--cta">
+          <i class="fa-solid fa-rocket"></i>
+          <h4 data-it="Inizia subito" data-en="Start now">Inizia subito</h4>
+          <p data-it="Registra la tua organizzazione e pubblica il primo evento gratuitamente." data-en="Register your organisation and publish your first event for free.">Registra la tua organizzazione e pubblica il primo evento gratuitamente.</p>
+          <a href="#" class="btn btn-primary" data-it="Diventa Organizzatore" data-en="Become an Organizer">Diventa Organizzatore</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       COMMUNITY / SOCIAL PREVIEW
+  ═══════════════════════════════════════════ -->
+  <section class="section section--dark" id="community">
+    <div class="container">
+      <div class="section__header section__header--light">
+        <span class="section__tag section__tag--light" data-it="Social Network" data-en="Social Network">Social Network</span>
+        <h2 class="section__title section__title--light" data-it="La tua Community" data-en="Your Community">La tua Community</h2>
+        <p class="section__desc section__desc--light" data-it="Feed, post, messaggi privati, gruppi dedicati. Tutto in un unico posto." data-en="Feed, posts, private messages, dedicated groups. All in one place.">
+          Feed, post, messaggi privati, gruppi dedicati. Tutto in un unico posto.
+        </p>
+      </div>
+
+      <div class="community-features">
+        <div class="comm-feat"><i class="fa-solid fa-rss"></i><span data-it="Feed attività" data-en="Activity feed">Feed attività</span></div>
+        <div class="comm-feat"><i class="fa-solid fa-pen-to-square"></i><span data-it="Post & Commenti" data-en="Posts & Comments">Post & Commenti</span></div>
+        <div class="comm-feat"><i class="fa-solid fa-envelope"></i><span data-it="Messaggi privati" data-en="Private messages">Messaggi privati</span></div>
+        <div class="comm-feat"><i class="fa-solid fa-people-group"></i><span data-it="Gruppi tematici" data-en="Themed groups">Gruppi tematici</span></div>
+        <div class="comm-feat"><i class="fa-solid fa-photo-film"></i><span data-it="Portfolio video/foto" data-en="Video/photo portfolio">Portfolio video/foto</span></div>
+        <div class="comm-feat"><i class="fa-solid fa-medal"></i><span data-it="Badge & Livelli" data-en="Badges & Levels">Badge & Livelli</span></div>
+      </div>
+
+      <div class="section__cta">
+        <a href="#" class="btn btn-primary btn-lg" data-it="Crea il tuo profilo" data-en="Create your profile">Crea il tuo profilo</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="logo-line footer-logo">Country</span><span class="logo-life footer-logo">Life</span><span class="logo-dot">●</span>
+        <p data-it="La casa europea della Line Dance." data-en="Europe's home of Line Dance.">La casa europea della Line Dance.</p>
+      </div>
+
+      <div class="footer__links">
+        <div class="footer__col">
+          <h5 data-it="Piattaforma" data-en="Platform">Piattaforma</h5>
+          <a href="#events" data-it="Eventi" data-en="Events">Eventi</a>
+          <a href="#schools" data-it="Scuole" data-en="Schools">Scuole</a>
+          <a href="#academy" data-it="Academy" data-en="Academy">Academy</a>
+          <a href="#marketplace" data-it="Marketplace" data-en="Marketplace">Marketplace</a>
+        </div>
+        <div class="footer__col">
+          <h5 data-it="Community" data-en="Community">Community</h5>
+          <a href="#community" data-it="Profilo Ballerino" data-en="Dancer Profile">Profilo Ballerino</a>
+          <a href="#community" data-it="Gruppi" data-en="Groups">Gruppi</a>
+          <a href="#recruiting" data-it="Recruiting" data-en="Recruiting">Recruiting</a>
+          <a href="#premium" data-it="Premium" data-en="Premium">Premium</a>
+        </div>
+        <div class="footer__col">
+          <h5 data-it="Azienda" data-en="Company">Azienda</h5>
+          <a href="#" data-it="Chi siamo" data-en="About us">Chi siamo</a>
+          <a href="#" data-it="Partner" data-en="Partners">Partner</a>
+          <a href="#" data-it="Contatti" data-en="Contact">Contatti</a>
+          <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 CountryLife. <span data-it="Tutti i diritti riservati." data-en="All rights reserved.">Tutti i diritti riservati.</span></p>
+    </div>
+  </footer>
+
+
+  <!-- JS -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Registra il service worker: rende il sito installabile e
+    // disponibile offline. Fallisce silenziosamente su file:// o
+    // browser vecchi: il sito resta comunque utilizzabile.
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch((err) => {
+          console.warn('Service worker non registrato:', err.message);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

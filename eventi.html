@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendario Eventi – CountryLife</title>
+  <meta name="description" content="Festival, competizioni, workshop e raduni di Line Dance in Italia e in tutta Europa." />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1B1B1B" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CountryLife" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/eventi.css" />
+</head>
+<body class="events-page">
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="index.html#hero" class="navbar__logo">
+        <span class="logo-line">Country</span><span class="logo-life">Life</span>
+        <span class="logo-dot">●</span>
+      </a>
+      <nav class="navbar__nav" id="navMenu">
+        <a href="eventi.html" class="active">Eventi</a>
+        <a href="index.html#travel">Travel</a>
+        <a href="index.html#schools">Scuole</a>
+        <a href="index.html#academy">Academy</a>
+        <a href="index.html#marketplace">Marketplace</a>
+        <a href="index.html#recruiting">Recruiting</a>
+        <a href="index.html#premium" class="nav-premium">Premium</a>
+      </nav>
+      <div class="navbar__actions">
+        <button class="btn-lang" id="langToggle" title="Switch language">
+          <i class="fa-solid fa-earth-europe"></i>
+          <span id="langLabel">IT</span>
+        </button>
+        <a href="index.html#community" class="btn btn-outline btn-sm">Accedi</a>
+        <a href="index.html#community" class="btn btn-primary btn-sm">Registrati</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE HERO
+  ═══════════════════════════════════════════ -->
+  <section class="page-hero">
+    <div class="page-hero__bg"></div>
+    <div class="container page-hero__content">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Calendario Eventi</span>
+      </nav>
+      <h1 class="page-hero__title" data-it="Calendario Europeo" data-en="European Calendar">Calendario Europeo</h1>
+      <p class="page-hero__desc" data-it="Festival, competizioni, workshop e raduni di Line Dance in tutta Europa." data-en="Line Dance festivals, competitions, workshops and gatherings across Europe.">
+        Festival, competizioni, workshop e raduni di Line Dance in tutta Europa.
+      </p>
+      <!-- Counter live -->
+      <div class="page-hero__stats">
+        <div class="hero-stat">
+          <span class="hero-stat__num" id="countVisible">4</span>
+          <span class="hero-stat__label" data-it="eventi trovati" data-en="events found">eventi trovati</span>
+        </div>
+        <div class="hero-stat__sep">·</div>
+        <div class="hero-stat">
+          <span class="hero-stat__num">2026–2027</span>
+          <span class="hero-stat__label" data-it="stagione" data-en="season">stagione</span>
+        </div>
+        <div class="hero-stat__sep">·</div>
+        <div class="hero-stat">
+          <span class="hero-stat__num">🇮🇹🇪🇺</span>
+          <span class="hero-stat__label" data-it="tutti in Italia e in Europa" data-en="all in Italy and Europe">tutti in Italia e in Europa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TOOLBAR FILTRI
+  ═══════════════════════════════════════════ -->
+  <div class="toolbar" id="toolbar">
+    <div class="container toolbar__inner">
+
+      <!-- Ricerca testuale -->
+      <div class="toolbar__search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Cerca evento, città, regione…" autocomplete="off" />
+        <button class="toolbar__clear" id="clearSearch" title="Cancella">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Filtri dropdown -->
+      <div class="toolbar__filters">
+
+        <div class="filter-select-wrap">
+          <i class="fa-solid fa-tag"></i>
+          <select id="filterType">
+            <option value="all" data-it="Tutti i tipi" data-en="All types">Tutti i tipi</option>
+            <option value="festival" data-it="Festival" data-en="Festival">Festival</option>
+            <option value="competizione" data-it="Competizione" data-en="Competition">Competizione</option>
+            <option value="workshop" data-it="Workshop" data-en="Workshop">Workshop</option>
+            <option value="raduno" data-it="Raduno" data-en="Gathering">Raduno</option>
+          </select>
+        </div>
+
+        <div class="filter-select-wrap">
+          <i class="fa-solid fa-globe-europe"></i>
+          <select id="filterCountry">
+            <option value="all" data-it="Tutti i paesi" data-en="All countries">Tutti i paesi</option>
+            <option value="it">🇮🇹 Italia</option>
+            <option value="fr">🇫🇷 Francia</option>
+            <option value="de">🇩🇪 Germania</option>
+            <option value="es">🇪🇸 Spagna</option>
+          </select>
+        </div>
+
+        <div class="filter-select-wrap">
+          <i class="fa-solid fa-layer-group"></i>
+          <select id="filterLevel">
+            <option value="all" data-it="Tutti i livelli" data-en="All levels">Tutti i livelli</option>
+            <option value="beginner" data-it="Principiante" data-en="Beginner">Principiante</option>
+            <option value="intermediate" data-it="Intermedio" data-en="Intermediate">Intermedio</option>
+            <option value="advanced" data-it="Avanzato" data-en="Advanced">Avanzato</option>
+          </select>
+        </div>
+
+        <div class="filter-select-wrap">
+          <i class="fa-solid fa-calendar-days"></i>
+          <select id="filterYear">
+            <option value="all" data-it="Tutti gli anni" data-en="All years">Tutti gli anni</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+          </select>
+        </div>
+
+        <button class="btn-reset-filters" id="resetFilters" title="Reset filtri">
+          <i class="fa-solid fa-rotate-left"></i>
+          <span data-it="Reset" data-en="Reset">Reset</span>
+        </button>
+
+      </div>
+
+      <!-- Vista toggle -->
+      <div class="toolbar__view">
+        <button class="view-btn active" id="viewGrid" title="Vista griglia">
+          <i class="fa-solid fa-grip"></i>
+        </button>
+        <button class="view-btn" id="viewList" title="Vista lista">
+          <i class="fa-solid fa-list"></i>
+        </button>
+        <button class="view-btn" id="viewCalendar" title="Vista calendario">
+          <i class="fa-solid fa-calendar-days"></i>
+        </button>
+      </div>
+
+    </div>
+  </toolbar>
+
+  <!-- ═══════════════════════════════════════════
+       CONTENUTO PRINCIPALE
+  ═══════════════════════════════════════════ -->
+  <main class="events-main">
+    <div class="container">
+
+      <!-- Messaggio nessun risultato -->
+      <div class="no-results hidden" id="noResults">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <h3 data-it="Nessun evento trovato" data-en="No events found">Nessun evento trovato</h3>
+        <p data-it="Prova a modificare i filtri di ricerca." data-en="Try adjusting the search filters.">Prova a modificare i filtri di ricerca.</p>
+        <button class="btn btn-primary" id="resetFilters2" data-it="Rimuovi filtri" data-en="Remove filters">Rimuovi filtri</button>
+      </div>
+
+      <!-- ── VISTA GRIGLIA ── -->
+      <div class="ev-grid" id="evGrid">
+
+        <!-- ★ EVENTO 1 – 20 GIU 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-06-20"
+          data-title="2a edizione festa country motta visconti proloco accadi">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/L2TWBfO6"
+                 alt="2ª Edizione Festa Country – Motta Visconti"
+                 class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>20</strong> GIU <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--imminent">🔥 Imminente</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Motta Visconti (MI)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">2ª Edizione Festa Country</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Pro Loco &amp; Az. Agricola Accadì</p>
+            <p class="ev-card__desc">Musica &amp; balli con DJ, barbeque americano e giochi a tema per adulti e bambini. Una festa country imperdibile in Lombardia.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-music"></i> Musica &amp; DJ</span>
+              <span class="ev-chip"><i class="fa-solid fa-fire-burner"></i> BBQ Americano</span>
+              <span class="ev-chip"><i class="fa-solid fa-gamepad"></i> Giochi a tema</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing">
+                <i class="fa-solid fa-clock"></i> Dalle 17:00
+              </div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="festa-country-motta-visconti-2026" data-it="Dettagli" data-en="Details">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm" data-it="Salva" data-en="Save">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+              <button class="btn btn-outline-brown btn-sm" data-it="Condividi" data-en="Share">
+                <i class="fa-solid fa-share-nodes"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO 5 – 25 OTT 2026 ★ -->
+        <article class="ev-card"
+          data-type="raduno"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-10-25"
+          data-title="oktoberwest country festival cornaredo ottobre">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/c6QDvHiq"
+                 alt="Oktoberwest Country Festival 2025"
+                 class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>25</strong> OTT <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--raduno">Raduno</span>
+              <span class="ev-badge ev-badge--sea">🍂 Autunno</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Cornaredo (MI)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Oktoberwest Country Festival</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Oktoberwest Country Festival</p>
+            <p class="ev-card__desc">Grande festival autunnale di ballo country al Palazzetto dello Sport di Cornaredo. Musica, line dance e atmosfera western. Dettagli e biglietti in arrivo.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-hat-cowboy"></i> Country Music</span>
+              <span class="ev-chip"><i class="fa-solid fa-person-walking"></i> Line Dance</span>
+              <span class="ev-chip"><i class="fa-solid fa-hourglass-half"></i> Coming Soon</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-clock"></i> Coming Soon</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="oktoberwest-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO 6 – 6 DIC 2026 ★ -->
+        <article class="ev-card"
+          data-type="raduno"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-12-06"
+          data-title="all for christmas country schools united cornaredo dicembre natale">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/gBl4EKSm"
+                 alt="All for Christmas! Country Schools United"
+                 class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>6</strong> DIC <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--raduno">Raduno</span>
+              <span class="ev-badge ev-badge--imminent">🎄 Natale</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Cornaredo (MI)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">All for Christmas!</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Country Schools United</p>
+            <p class="ev-card__desc">Il grande raduno natalizio che riunisce le scuole country italiane al Palazzetto dello Sport di Cornaredo. Line dance e atmosfera natalizia.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-star"></i> Natale Country</span>
+              <span class="ev-chip"><i class="fa-solid fa-school"></i> Scuole Unite</span>
+              <span class="ev-chip"><i class="fa-solid fa-person-walking"></i> Line Dance</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-clock"></i> Coming Soon</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="all-for-christmas-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO 7 – 19-21 GIU 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-06-19"
+          data-title="jesolo country festival piazza milano giugno live music sticash">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/dPqKgkDE"
+                 alt="Jesolo Country Festival 2026"
+                 class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>19–21</strong> GIU <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--linedance">🎵 Live</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Piazza Milano, Jesolo (VE)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Jesolo Country Festival</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Comitato Milano · Città di Jesolo</p>
+            <p class="ev-card__desc">3 giorni di musica country live a Jesolo con Sticash, West DJ, DJ Eros, DJ Flavio. Partecipano 6 scuole di ballo. Ingresso libero.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-guitar"></i> Sticash Live</span>
+              <span class="ev-chip"><i class="fa-solid fa-headphones"></i> West DJ · DJ Eros</span>
+              <span class="ev-chip"><i class="fa-solid fa-ticket"></i> Ingresso libero</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-calendar-week"></i> 3 giorni</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="jesolo-country-festival-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO 2 – 10-12 LUG 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-07-10"
+          data-title="valsassina country festival 11 edizione luglio">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/Kqbbpax9"
+                 alt="11ª Valsassina Country Festival 2026"
+                 class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>10–12</strong> LUG <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--edition">11ª Ed.</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Valsassina, LC</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Valsassina Country Festival</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Valsassina Country Festival®</p>
+            <p class="ev-card__desc">L'11ª edizione del festival country più amato delle Alpi Lombarde. Tre giorni di musica, balli e cultura western tra le montagne della Valsassina.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-mountain"></i> Montagna</span>
+              <span class="ev-chip"><i class="fa-solid fa-person-walking"></i> Line Dance</span>
+              <span class="ev-chip"><i class="fa-solid fa-ticket"></i> Biglietti sul sito</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing">
+                <i class="fa-solid fa-calendar-week"></i> 3 giorni
+              </div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="valsassina-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+              <button class="btn btn-outline-brown btn-sm">
+                <i class="fa-solid fa-share-nodes"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO 8 – 12 LUG 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-07-12"
+          data-title="bud terence festival 2026 cassano magnago los gringos western show">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/PK31WudT"
+                 alt="Bud &amp; Terence Festival 2026"
+                 class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>12</strong> LUG <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--imminent">🤠 Free</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Cassano Magnago (VA)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Bud &amp; Terence Festival 2026</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> James Tex Western / Friends &amp; Fan</p>
+            <p class="ev-card__desc">Festival western con Los Gringos – Live Western Show: scene e sparatorie dal vivo ispirate ai film di Bud Spencer e Terence Hill. Ingresso gratuito, dalle 11:00.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-hat-cowboy"></i> Los Gringos Live</span>
+              <span class="ev-chip"><i class="fa-solid fa-star"></i> Sparatorie dal vivo</span>
+              <span class="ev-chip"><i class="fa-solid fa-ticket"></i> Ingresso gratuito</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-clock"></i> Dalle 11:00</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="bud-and-terence-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO 3 – 5 SET 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-09-05"
+          data-title="blue salento country fest quinta musa aps melendugno settembre">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/6hTghy3Q"
+                 alt="Blue Salento Country Fest 2026"
+                 class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>5</strong> SET <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--sea">🌊 Mare</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Melendugno, Salento (LE)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Blue Salento Country Fest</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Associazione Quinta Musa APS</p>
+            <p class="ev-card__desc">Festival country sul mare del Salento, con il patrocinio del Comune di Melendugno. Musica, balli e atmosfera western nel cuore del Salento.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-water"></i> Salento</span>
+              <span class="ev-chip"><i class="fa-solid fa-hat-cowboy"></i> Country Music</span>
+              <span class="ev-chip"><i class="fa-solid fa-phone"></i> 328 4666339</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing">
+                <i class="fa-solid fa-calendar-day"></i> 1 giorno
+              </div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="blue-salento-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+              <button class="btn btn-outline-brown btn-sm">
+                <i class="fa-solid fa-share-nodes"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO 4 – 13-15 NOV 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-11-13"
+          data-title="round up country festival cremona fiere novembre line dance">
+          <div class="ev-card__img-wrap">
+            <img src="https://www.genspark.ai/api/files/s/ConRVcSW"
+                 alt="Round-Up Country Festival – Cremona Fiere 2026"
+                 class="ev-card__img ev-card__img--dark" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>13–15</strong> NOV <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--linedance">Line Dance</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Cremona Fiere, Cremona (CR)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Round-Up Country Festival</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Round-Up Country Festival</p>
+            <p class="ev-card__desc">Il festival italiano dedicato alla Country Line Dance. Tre giorni di spettacoli, workshop e competizioni nella storica sede di Cremona Fiere.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-guitar"></i> Country Music</span>
+              <span class="ev-chip"><i class="fa-solid fa-people-line"></i> Line Dance</span>
+              <span class="ev-chip"><i class="fa-solid fa-calendar-week"></i> 3 giorni</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing">
+                <i class="fa-solid fa-calendar-week"></i> 13–15 Novembre
+              </div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="round-up-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+              <button class="btn btn-outline-brown btn-sm">
+                <i class="fa-solid fa-share-nodes"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO – 9-11 OTT 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-10-09"
+          data-title="cerea country party la loggia torino ottobre scuole bandiere">
+          <div class="ev-card__img-wrap">
+            <img src="images/eventi/cerea-country-party-2026.jpg"
+                  alt="Cerea Country Party – La Loggia"
+                  class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>9–11</strong> OTT <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--imminent">🎉 Party</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> La Loggia (TO)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Cerea Country Party</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Riding West</p>
+            <p class="ev-card__desc">Tre giorni di country a La Loggia. Porta la bandiera o la maglietta della tua scuola: verrà appesa nello spazio dedicato.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-school"></i> Porta la tua scuola</span>
+              <span class="ev-chip"><i class="fa-solid fa-flag"></i> Bandiere e magliette</span>
+              <span class="ev-chip"><i class="fa-solid fa-calendar-week"></i> 3 giorni</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-calendar-week"></i> 9–11 Ottobre</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="cerea-country-party-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO – 23-25 OTT 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-10-23"
+          data-title="apulia country festival nardo lecce puglia ottobre live workshop">
+          <div class="ev-card__img-wrap">
+            <img src="images/eventi/apulia-country-festival-2026.jpg"
+                  alt="Apulia Country Festival 2026"
+                  class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>23–25</strong> OTT <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--imminent">🔥 Ultimi posti</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Nardò (LE)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Apulia Country Festival</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Apulia Country Festival</p>
+            <p class="ev-card__desc">Tre giorni a Torre Inserraglio: live music, workshop, DJ set, area food. Iscrizioni quasi al tutto esaurito.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-guitar"></i> Live Music</span>
+              <span class="ev-chip"><i class="fa-solid fa-chalkboard-user"></i> Workshop e DJ Set</span>
+              <span class="ev-chip"><i class="fa-solid fa-utensils"></i> Area Food</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-calendar-week"></i> 23–25 Ottobre</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="apulia-country-festival-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO – 3 OTT 2026 ★ -->
+        <article class="ev-card"
+          data-type="raduno"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-10-03"
+          data-title="country night dj mr dollaro corsico milano ottobre serata">
+          <div class="ev-card__img-wrap">
+            <img src="images/eventi/country-night-corsico-2026.jpg"
+                  alt="Country Night – DJ Mr Dollaro"
+                  class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>3</strong> OTT <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--raduno">Raduno</span>
+              <span class="ev-badge ev-badge--linedance">🎶 Serata</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Corsico (MI)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Country Night, DJ Mr Dollaro</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Country Events / Circle Milano</p>
+            <p class="ev-card__desc">Serata country a Corsico con DJ Mr Dollaro. Ingresso dalle 21:00, inizio 21:30, country food e drink.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-music"></i> DJ Mr Dollaro</span>
+              <span class="ev-chip"><i class="fa-solid fa-utensils"></i> Country Food e Drink</span>
+              <span class="ev-chip"><i class="fa-solid fa-clock"></i> Dalle 21:00</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-clock"></i> Dalle 21:00</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="country-night-corsico-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO – 2-4 OTT 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-10-02"
+          data-title="indian summer country festival cormano ottobre fabian muller dj denny">
+          <div class="ev-card__img-wrap">
+            <img src="images/eventi/indian-summer-country-festival-2026.jpg"
+                  alt="Indian Summer Country Festival 2026"
+                  class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>2–4</strong> OTT <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--sea">🍂 Save the date</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Cormano (MI)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Indian Summer Country Festival</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Marco Dollaro e Country Events</p>
+            <p class="ev-card__desc">Save the date 2–4 ottobre a Cormano: DJ Denny e QDC, Friday Fun Night con Fabian Müller.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-music"></i> DJ Denny e QDC</span>
+              <span class="ev-chip"><i class="fa-solid fa-star"></i> Fabian Müller</span>
+              <span class="ev-chip"><i class="fa-solid fa-hat-cowboy"></i> Marco Dollaro</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-calendar-week"></i> 2–4 Ottobre</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="indian-summer-country-festival-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ★ EVENTO – 12-13 DIC 2026 ★ -->
+        <article class="ev-card"
+          data-type="festival"
+          data-country="it"
+          data-level="all"
+          data-year="2026"
+          data-date="2026-12-12"
+          data-title="country rock christmas festival montesilvano dicembre fofana lattanzio coreografi">
+          <div class="ev-card__img-wrap">
+            <img src="images/eventi/country-rock-christmas-festival-2026.jpg"
+                  alt="Country Rock Christmas Festival"
+                  class="ev-card__img" loading="lazy" />
+            <div class="ev-card__overlay">
+              <span class="ev-card__date-badge">
+                <strong>12–13</strong> DIC <strong>2026</strong>
+              </span>
+            </div>
+            <div class="ev-card__badges">
+              <span class="ev-badge ev-badge--festival">Festival</span>
+              <span class="ev-badge ev-badge--imminent">🎄 Natale</span>
+            </div>
+          </div>
+          <div class="ev-card__body">
+            <div class="ev-card__meta-row">
+              <span class="ev-card__location"><i class="fa-solid fa-location-dot"></i> Montesilvano Marina (PE)</span>
+              <span class="ev-card__country">🇮🇹</span>
+            </div>
+            <h2 class="ev-card__title">Country Rock Christmas Festival</h2>
+            <p class="ev-card__org"><i class="fa-solid fa-building"></i> Country Rock Christmas Festival</p>
+            <p class="ev-card__desc">12–13 dicembre con i coreografi Algaly Fofana e Teo Lattanzio. Sede e programma in arrivo.</p>
+            <div class="ev-card__chips">
+              <span class="ev-chip"><i class="fa-solid fa-star"></i> Algaly Fofana</span>
+              <span class="ev-chip"><i class="fa-solid fa-star"></i> Teo Lattanzio</span>
+              <span class="ev-chip"><i class="fa-solid fa-chalkboard-user"></i> Coreografi</span>
+            </div>
+            <div class="ev-card__footer">
+              <div class="ev-card__timing"><i class="fa-solid fa-calendar-week"></i> 12–13 Dicembre</div>
+              <div class="ev-card__level ev-card__level--all">Tutti i livelli</div>
+            </div>
+            <div class="ev-card__actions">
+              <button class="btn btn-primary btn-sm ev-detail-btn" data-id="country-rock-christmas-festival-2026">
+                <i class="fa-solid fa-circle-info"></i> Dettagli
+              </button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+              <button class="btn btn-outline-brown btn-sm"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /ev-grid -->
+
+      <!-- ── VISTA LISTA ── -->
+      <div class="ev-list hidden" id="evList">
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-06-20" data-title="2a edizione festa country motta visconti proloco accadi">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">20</span><span class="ev-list-item__month">GIU</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/L2TWBfO6" alt="Festa Country" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--imminent">🔥 Imminente</span></div>
+            <h3>2ª Edizione Festa Country</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Motta Visconti (MI) 🇮🇹 · <i class="fa-solid fa-clock"></i> Dalle 17:00</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Pro Loco &amp; Az. Agricola Accadì</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="festa-country-motta-visconti-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="raduno" data-country="it" data-level="all" data-year="2026" data-date="2026-10-25" data-title="oktoberwest country festival cornaredo ottobre">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">25</span><span class="ev-list-item__month">OTT</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/c6QDvHiq" alt="Oktoberwest" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--raduno">Raduno</span><span class="ev-badge ev-badge--sea">🍂 Autunno</span></div>
+            <h3>Oktoberwest Country Festival</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Cornaredo (MI) 🇮🇹 · <i class="fa-solid fa-hourglass-half"></i> Coming Soon</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Oktoberwest Country Festival</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="oktoberwest-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="raduno" data-country="it" data-level="all" data-year="2026" data-date="2026-12-06" data-title="all for christmas country schools united cornaredo dicembre natale">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">6</span><span class="ev-list-item__month">DIC</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/gBl4EKSm" alt="All for Christmas" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--raduno">Raduno</span><span class="ev-badge ev-badge--imminent">🎄 Natale</span></div>
+            <h3>All for Christmas! Country Schools United</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Cornaredo (MI) 🇮🇹 · <i class="fa-solid fa-hourglass-half"></i> Coming Soon</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Country Schools United</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="all-for-christmas-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-06-19" data-title="jesolo country festival piazza milano giugno live music sticash">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">19</span><span class="ev-list-item__month">GIU</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/dPqKgkDE" alt="Jesolo Country Festival" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--linedance">🎵 Live</span></div>
+            <h3>Jesolo Country Festival</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Piazza Milano, Jesolo (VE) 🇮🇹 · <i class="fa-solid fa-calendar-week"></i> 19–21 Giugno 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Comitato Milano · Città di Jesolo</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="jesolo-country-festival-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-07-10" data-title="valsassina country festival 11 edizione luglio">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">10</span><span class="ev-list-item__month">LUG</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/Kqbbpax9" alt="Valsassina" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--edition">11ª Ed.</span></div>
+            <h3>Valsassina Country Festival</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Valsassina, LC 🇮🇹 · <i class="fa-solid fa-calendar-week"></i> 10–12 Luglio 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Valsassina Country Festival®</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="valsassina-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-07-12" data-title="bud terence festival 2026 cassano magnago los gringos western show">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">12</span><span class="ev-list-item__month">LUG</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/PK31WudT" alt="Bud &amp; Terence Festival" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--imminent">🤠 Free</span></div>
+            <h3>Bud &amp; Terence Festival 2026</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Cassano Magnago (VA) 🇮🇹 · <i class="fa-solid fa-clock"></i> Dalle 11:00</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> James Tex Western / Friends &amp; Fan</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="bud-and-terence-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-09-05" data-title="blue salento country fest quinta musa aps melendugno settembre">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">5</span><span class="ev-list-item__month">SET</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/6hTghy3Q" alt="Blue Salento" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--sea">🌊 Mare</span></div>
+            <h3>Blue Salento Country Fest</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Melendugno, Salento (LE) 🇮🇹 · <i class="fa-solid fa-calendar-day"></i> 5 Settembre 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Associazione Quinta Musa APS</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="blue-salento-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-11-13" data-title="round up country festival cremona fiere novembre line dance">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">13</span><span class="ev-list-item__month">NOV</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="https://www.genspark.ai/api/files/s/ConRVcSW" alt="Round-Up" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--linedance">Line Dance</span></div>
+            <h3>Round-Up Country Festival</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Cremona Fiere (CR) 🇮🇹 · <i class="fa-solid fa-calendar-week"></i> 13–15 Novembre 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Round-Up Country Festival</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="round-up-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-10-09" data-title="cerea country party la loggia torino ottobre scuole bandiere">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">9</span><span class="ev-list-item__month">OTT</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="images/eventi/cerea-country-party-2026.jpg" alt="Cerea Country Party" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--imminent">🎉 Party</span></div>
+            <h3>Cerea Country Party</h3>
+            <p><i class="fa-solid fa-location-dot"></i> La Loggia (TO) 🇮🇹 · <i class="fa-solid fa-calendar-week"></i> 9–11 Ottobre 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Riding West</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="cerea-country-party-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-10-23" data-title="apulia country festival nardo lecce puglia ottobre live workshop">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">23</span><span class="ev-list-item__month">OTT</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="images/eventi/apulia-country-festival-2026.jpg" alt="Apulia Country Festival" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--imminent">🔥 Ultimi posti</span></div>
+            <h3>Apulia Country Festival</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Nardò (LE) 🇮🇹 · <i class="fa-solid fa-calendar-week"></i> 23–25 Ottobre 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Apulia Country Festival</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="apulia-country-festival-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="raduno" data-country="it" data-level="all" data-year="2026" data-date="2026-10-03" data-title="country night dj mr dollaro corsico milano ottobre serata">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">3</span><span class="ev-list-item__month">OTT</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="images/eventi/country-night-corsico-2026.jpg" alt="Country Night" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--raduno">Raduno</span><span class="ev-badge ev-badge--linedance">🎶 Serata</span></div>
+            <h3>Country Night, DJ Mr Dollaro</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Corsico (MI) 🇮🇹 · <i class="fa-solid fa-clock"></i> Dalle 21:00</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Country Events / Circle Milano</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="country-night-corsico-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-10-02" data-title="indian summer country festival cormano ottobre fabian muller dj denny">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">2</span><span class="ev-list-item__month">OTT</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="images/eventi/indian-summer-country-festival-2026.jpg" alt="Indian Summer" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--sea">🍂 Save the date</span></div>
+            <h3>Indian Summer Country Festival</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Cormano (MI) 🇮🇹 · <i class="fa-solid fa-calendar-week"></i> 2–4 Ottobre 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Marco Dollaro e Country Events</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="indian-summer-country-festival-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+        <div class="ev-list-item" data-type="festival" data-country="it" data-level="all" data-year="2026" data-date="2026-12-12" data-title="country rock christmas festival dicembre fofana lattanzio coreografi">
+          <div class="ev-list-item__date-col"><span class="ev-list-item__day">12</span><span class="ev-list-item__month">DIC</span><span class="ev-list-item__year">2026</span></div>
+          <div class="ev-list-item__img"><img src="images/eventi/country-rock-christmas-festival-2026.jpg" alt="Country Rock Christmas" loading="lazy" /></div>
+          <div class="ev-list-item__body">
+            <div class="ev-list-item__top"><span class="ev-badge ev-badge--festival">Festival</span><span class="ev-badge ev-badge--imminent">🎄 Natale</span></div>
+            <h3>Country Rock Christmas Festival</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Montesilvano Marina (PE) 🇮🇹 · <i class="fa-solid fa-calendar-week"></i> 12–13 Dicembre 2026</p>
+            <p class="ev-list-item__org"><i class="fa-solid fa-building"></i> Country Rock Christmas Festival</p>
+          </div>
+          <div class="ev-list-item__actions">
+            <button class="btn btn-primary btn-sm ev-detail-btn" data-id="country-rock-christmas-festival-2026"><i class="fa-solid fa-circle-info"></i> Dettagli</button>
+            <button class="btn btn-outline-brown btn-sm"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+        </div>
+
+      </div><!-- /ev-list -->
+
+      <!-- ── VISTA CALENDARIO ── -->
+      <div class="ev-calendar-view hidden" id="evCalendarView">
+        <div class="cal-nav">
+          <button class="btn btn-outline-brown btn-sm" id="calPrev"><i class="fa-solid fa-chevron-left"></i></button>
+          <h3 id="calMonthLabel">Giugno 2026</h3>
+          <button class="btn btn-outline-brown btn-sm" id="calNext"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend">
+          <span class="cal-dot cal-dot--festival"></span>
+          <span data-it="Festival" data-en="Festival">Festival</span>
+        </div>
+      </div>
+
+    </div><!-- /container -->
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════
+       MODALE DETTAGLIO EVENTO
+  ═══════════════════════════════════════════ -->
+  <div class="ev-modal-overlay hidden" id="evModalOverlay" role="dialog" aria-modal="true">
+    <div class="ev-modal" id="evModal">
+      <button class="ev-modal__close" id="evModalClose" aria-label="Chiudi">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="ev-modal__content" id="evModalContent">
+        <!-- contenuto dinamico -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="logo-line footer-logo">Country</span><span class="logo-life footer-logo">Life</span><span class="logo-dot">●</span>
+        <p data-it="La casa europea della Line Dance." data-en="Europe's home of Line Dance.">La casa europea della Line Dance.</p>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <h5 data-it="Piattaforma" data-en="Platform">Piattaforma</h5>
+          <a href="eventi.html" data-it="Calendario Eventi" data-en="Events Calendar">Calendario Eventi</a>
+          <a href="index.html#schools" data-it="Scuole" data-en="Schools">Scuole</a>
+          <a href="index.html#academy" data-it="Academy" data-en="Academy">Academy</a>
+          <a href="index.html#marketplace" data-it="Marketplace" data-en="Marketplace">Marketplace</a>
+        </div>
+        <div class="footer__col">
+          <h5 data-it="Community" data-en="Community">Community</h5>
+          <a href="index.html#community" data-it="Profilo Ballerino" data-en="Dancer Profile">Profilo Ballerino</a>
+          <a href="index.html#community" data-it="Gruppi" data-en="Groups">Gruppi</a>
+          <a href="index.html#recruiting" data-it="Recruiting" data-en="Recruiting">Recruiting</a>
+          <a href="index.html#premium" data-it="Premium" data-en="Premium">Premium</a>
+        </div>
+        <div class="footer__col">
+          <h5 data-it="Azienda" data-en="Company">Azienda</h5>
+          <a href="#" data-it="Chi siamo" data-en="About us">Chi siamo</a>
+          <a href="#" data-it="Contatti" data-en="Contact">Contatti</a>
+          <a href="/privacy.html" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 CountryLife. <span data-it="Tutti i diritti riservati." data-en="All rights reserved.">Tutti i diritti riservati.</span></p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/eventi.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch((err) => {
+          console.warn('Service worker non registrato:', err.message);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "name": "CountryLife – La casa europea della Line Dance",
+  "short_name": "CountryLife",
+  "description": "Trova eventi, scuole e professionisti della Line Dance in Italia e in tutta Europa. Community, corsi, marketplace e viaggi.",
+  "lang": "it",
+  "dir": "ltr",
+  "start_url": "/app/",
+  "scope": "/",
+  "id": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "background_color": "#F7F5F2",
+  "theme_color": "#1B1B1B",
+  "categories": ["social", "lifestyle", "education", "events"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calendario eventi",
+      "short_name": "Eventi",
+      "description": "Vai subito agli eventi in programma",
+      "url": "/app/?view=eventi",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Trova una scuola",
+      "short_name": "Scuole",
+      "description": "Cerca scuole di line dance vicino a te",
+      "url": "/app/?view=scuole",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
